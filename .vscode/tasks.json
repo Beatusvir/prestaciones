@@ -1,0 +1,11 @@
+{
+    "version": "0.1.0",
+    "command": "chromium",
+    "linux": {
+        "command": "chromium"
+    },
+    "showOutput": "never",
+    "args": [
+        "${file}"
+    ]
+}

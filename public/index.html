@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Prestaciones Sociales</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+  crossorigin="anonymous">
+  
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+
+<body ng-app="prestacionesApp">
+  <div id='main' class="container">
+    <nav class="navbar-fluid navbar-default navbar-fixed-top">
+      <div class="container">
+        <a href="#/" class="navbar-brand">Prestaciones</a>
+        <p class="navbar-text">Calculo de Prestaciones Sociales</p>
+        <p class="navbar-right navbar-text" ng-hide="authenticated"><a href="#/login">Login</a> or <a href="#/register">Register</a> </p>
+        <p class="navbar-right navbar-text" ng-show="authenticated"><a href="#" ng-click="signout()">Logout</a> </p>
+        <p class="navbar-right navbar-text" ng-show="authenticated">Signed in as {{current_user.username}}</p>
+      </div>
+    </nav>
+    <div class="col-md-offset-2 col-md-8">
+      <div ng-view ng-cloak></div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-resource.min.js"></script>
+  <script src="javascripts/prestaciones.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+  crossorigin="anonymous"></script>
+</body>
+
+</html>

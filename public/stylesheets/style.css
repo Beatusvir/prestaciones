@@ -1,0 +1,28 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+a {
+  color: #00B7FF;
+}
+.ng-cloak{
+  display: none;
+}
+.form-small{
+  width: 30%;
+  margin: 0 auto;
+}
+.link-disabled {
+  color: #ccc;
+  cursor: default;
+}
+.link-enabled {
+  color: #000;
+  cursor: pointer;
+}
+.link-enabled:hover{
+  background: #fcfcfc; 
+}
+#table-employee tr td span:hover{
+  cursor: pointer;
+}

@@ -1,0 +1,11 @@
+.link-disabled {
+  color: #ccc;
+  cursor: default;
+}
+.link-enabled {
+  color: #000;
+  cursor: pointer;
+}
+.link-enabled:hover{
+  background: #fcfcfc; 
+}
