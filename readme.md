@@ -14,3 +14,4 @@ Esta aplicación MEAN realiza el calculo de prestaciones sociales y permite tene
 * Implementar pagina de recibo
 * Realizar calculo de prestaciones
 * Implementar sesión
+* Implementar estilo (CSS)
