@@ -26,3 +26,9 @@ a {
 #table-employee tr td span:hover{
   cursor: pointer;
 }
+.form{
+  margin-top: 100px;
+  display: block;
+  padding: 100px;
+  background: #E1F5FE;
+}

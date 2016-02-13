@@ -9,7 +9,7 @@ Esta aplicación MEAN realiza el calculo de prestaciones sociales y permite tene
 * https://www.mongodb.org
 * https://nodejs.org
 
-### ToDo
+###ToDo
 * Implementar registro de pagos
 * Implementar pagina de recibo
 * Realizar calculo de prestaciones

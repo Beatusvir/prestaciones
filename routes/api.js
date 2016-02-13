@@ -294,10 +294,10 @@ router.route('/v1/payments')
     console.log('Trying to add a payment')
     var payment = new Payment()
 
-    payment.averageDailySalary = req.body.averageDailySalary,
-    payment.aliquotUtility = req.body.aliquotUtility,
-    payment.integralSalary = req.body.integralSalary,
-    payment.antiquityAmount = req.body.antiquityAmount,
+    payment.salary = req.body.salary,
+    payment.startDate = req.body.startDate,
+    payment.endDate = req.body.endDate,
+    payment.deduction = req.body.deduction,
     payment.employeeId = req.body.employeeId,
     payment.created_at = req.body.created_at,
     payment.created_by = req.body.created_by
@@ -327,13 +327,13 @@ router.route('/v1/payments/:id')
         return res.status(500).send(err)
       }
 
-      payment.averageDailySalary = req.body.averageDailySalary,
-      payment.aliquotUtility = req.body.aliquotUtility,
-      payment.integralSalary = req.body.integralSalary,
-      payment.antiquityAmount = req.body.antiquityAmount,
+      payment.salary = req.body.salary,
+      payment.startDate = req.body.startDate,
+      payment.endDate = req.body.endDate,
+      payment.deduction = req.body.deduction,
       payment.employeeId = req.body.employeeId,
-      payment.payment.created_at = req.body.created_at,
-      payment.payment.created_by = req.body.created_by
+      payment.created_at = req.body.created_at,
+      payment.created_by = req.body.created_by
       payment.save(function (err, employee) {
         if (err) {
           return res.status(500).send(err)

@@ -1,5 +1,6 @@
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
+var jwt = require('jsonwebtoken')
 
 var userSchema = new mongoose.Schema({
   username: String,
@@ -49,6 +50,7 @@ var paymentSchema = new mongoose.Schema({
   startDate: Date,
   endDate: Date,
   deduction: Number,
+  employeeId: { type: Schema.ObjectId, ref: 'Employee' },
   created_at: { type: Date, default: Date.now() },
   created_by: { type: Schema.ObjectId, ref: 'User' }
 })
