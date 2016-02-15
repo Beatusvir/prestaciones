@@ -13,7 +13,7 @@ var api = require('./routes/api')
 var authenticate = require('./routes/authenticate')(passport)
 var mongoose = require('mongoose')
 
-var host = 'localhost'
+var host = 'atrocse'
 var port = '27017'
 var db = 'prestaciones'
 // connect to mongodb

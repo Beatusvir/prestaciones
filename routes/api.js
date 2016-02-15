@@ -1,6 +1,9 @@
 var express = require('express')
 var router = express.Router()
 var mongoose = require('mongoose')
+var busboy = require('connect-busboy')
+var path = require('path')
+var fs = require('fs-extra')
 
 var Employee = mongoose.model('Employee')
 var Company = mongoose.model('Company')
@@ -351,6 +354,22 @@ router.route('/v1/payments/:id')
         return res.status(500).send(err)
       }
       return res.json('deleted')
+    })
+  })
+
+router.route('/upload')
+  .post(function (req, res, next){
+    var fstream
+    req.pipe(req.busboy)
+    req.busboy.on('file', function(fieldname, file, filename){
+      console.log('Uploading: ' + filename)
+      
+      fstream = fs.createWriteStream(__dirname + '/img/' + filename)
+      file.pipe(fstream)
+      fstream.on('close', function() {
+        console.log('Upload finished of ' + filename)
+        res.redirect('back')
+      })
     })
   })
 

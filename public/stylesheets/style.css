@@ -5,12 +5,18 @@ body {
 a {
   color: #00B7FF;
 }
+.absolute-center{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 .ng-cloak{
   display: none;
-}
-.form-small{
-  width: 30%;
-  margin: 0 auto;
 }
 .link-disabled {
   color: #ccc;
@@ -25,10 +31,4 @@ a {
 }
 #table-employee tr td span:hover{
   cursor: pointer;
-}
-.form{
-  margin-top: 100px;
-  display: block;
-  padding: 100px;
-  background: #E1F5FE;
 }

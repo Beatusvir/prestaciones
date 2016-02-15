@@ -1,5 +1,5 @@
 'use strict'
-var app = angular.module('prestacionesApp', ['ngRoute', 'ngResource']).run(function ($rootScope, $http) {
+var app = angular.module('prestacionesApp', ['ngRoute', 'ngResource', 'angularFileUpload']).run(function ($rootScope, $http) {
   $rootScope.authenticated = false
   $rootScope.current_user = ''
 

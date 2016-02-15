@@ -1,8 +1,8 @@
 {
     "version": "0.1.0",
-    "command": "chromium",
+    "command": "firefox",
     "linux": {
-        "command": "chromium"
+        "command": "firefox"
     },
     "showOutput": "never",
     "args": [
