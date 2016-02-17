@@ -11,8 +11,8 @@ This MEAN-app is used to calculate social benefits of employees using formulas f
 * http://expressjs.com/
 
 ##ToDo
-* Payments
-* Calculate social benefits
-* Receipt
-* User Session
-* CSS
+- [X] Add Payments
+- [ ] Calculate social benefits
+- [ ] Create invoice
+- [X] User Session
+- [ ] CSS
