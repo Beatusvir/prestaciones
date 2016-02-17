@@ -15,4 +15,4 @@ This MEAN-app is used to calculate social benefits of employees using formulas f
 - [ ] Calculate social benefits
 - [ ] Create invoice
 - [X] User Session
-- [ ] CSS
+- [ ] Style
