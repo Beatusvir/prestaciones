@@ -1,17 +1,18 @@
-# Prestaciones
+#Social Benefits
 
-###Calculo de Prestaciones Sociales en Venezuela
-Esta aplicación MEAN realiza el calculo de prestaciones sociales y permite tener un registro de empresas y empleados. Además se puede crear un recibo de pago con los calculos realizados.
+##Description
+This MEAN-app is used to calculate social benefits of employees using formulas from Venezuelan laws. It allows the user to create companies (and assign employees) in order to set basic parameters that can change between companies and affect the result.
 
-###Para mas información:
+##More info
 * http://www.mean.io
 * https://angularjs.org
 * https://www.mongodb.org
 * https://nodejs.org
+* http://expressjs.com/
 
-###ToDo
-* Implementar registro de pagos
-* Implementar pagina de recibo
-* Realizar calculo de prestaciones
-* Implementar sesión
-* Implementar estilo (CSS)
+##ToDo
+* Payments
+* Calculate social benefits
+* Receipt
+* User Session
+* CSS
