@@ -39,7 +39,6 @@ router.route('/v1/employees')
         console.log(err)
         return res.status(500).send(err)
       }
-      console.log(employees)
       return res.status(200).send(employees)
     })
 
@@ -72,6 +71,7 @@ router.route('/v1/employees')
 router.route('/v1/employees/:id')
 
   .get(function (req, res, next) {
+    console.log('Trying to get employee with id: ' + req.params.id);
     Employee.findById(req.params.id, function (err, employee) {
       if (err) {
         return res.status(500).send(err)
@@ -81,6 +81,7 @@ router.route('/v1/employees/:id')
   })
 
   .put(function (req, res, next) {
+    console.log('Trying to put employee with id: ' + req.params.id);
     Employee.findById(req.params.id, function (err, employee) {
       if (err) {
         return res.status(500).send(err)
@@ -130,7 +131,6 @@ router.route('/v1/companies')
         console.log(err)
         return res.status(500).send(err)
       }
-      console.log(companies)
       return res.status(200).send(companies)
     })
   })
@@ -155,11 +155,12 @@ router.route('/v1/companies')
 router.route('/v1/companies/:id')
 
   .get(function (req, res, next) {
+    console.log('Trying to get company with id: ' + req.params.id);
     Company.findById(req.params.id, function (err, company) {
       if (err) {
         return res.status(500).send(err)
       }
-      return res.status(500).send(company)
+      return res.status(200).send(company)
     })
   })
 
@@ -207,7 +208,6 @@ router.route('/v1/assignments')
         console.log(err)
         return res.status(500).send(err)
       }
-      console.log(assignments)
       return res.status(200).send(assignments)
     })
   })
@@ -235,11 +235,12 @@ router.route('/v1/assignments')
 router.route('/v1/assignments/:id')
 
   .get(function (req, res, next) {
+    console.log('Trying to get assignment with id: ' + req.params.id);
     Assignment.findById(req.params.id, function (err, assignment) {
       if (err) {
         return res.status(500).send(err)
       }
-      return res.status(500).send(assignment)
+      return res.status(200).send(assignment)
     })
   })
 
@@ -288,7 +289,6 @@ router.route('/v1/payments')
         console.log(err)
         return res.status(500).send(err)
       }
-      console.log(payments)
       return res.status(200).send(payments)
     })
   })
@@ -316,11 +316,12 @@ router.route('/v1/payments')
 router.route('/v1/payments/:id')
 
   .get(function (req, res, next) {
+    console.log('Trying to get payment with id: ' + req.params.id);
     Payment.findById(req.params.id, function (err, payment) {
       if (err) {
         return res.status(500).send(err)
       }
-      return res.status(500).send(payment)
+      return res.status(200).send(payment)
     })
   })
 
@@ -358,15 +359,16 @@ router.route('/v1/payments/:id')
   })
 
 router.route('/upload')
-  .post(function (req, res, next){
+  .post(function (req, res, next) {
+    console.log('Trying to upload file')
     var fstream
     req.pipe(req.busboy)
-    req.busboy.on('file', function(fieldname, file, filename){
+    req.busboy.on('file', function (fieldname, file, filename) {
       console.log('Uploading: ' + filename)
-      
+
       fstream = fs.createWriteStream(__dirname + '/img/' + filename)
       file.pipe(fstream)
-      fstream.on('close', function() {
+      fstream.on('close', function () {
         console.log('Upload finished of ' + filename)
         res.redirect('back')
       })

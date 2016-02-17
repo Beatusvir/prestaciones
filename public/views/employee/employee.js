@@ -1,10 +1,15 @@
+'use strict'
 angular.module('prestacionesApp')
   .factory('employeesService', function ($resource) {
     return $resource('api/v1/employees/:id', { id: '@_id'},
-      { update: { method: 'put'} }
+      { 'get': {method: 'GET'},
+        'save': {method: 'POST'},
+        'query': {method: 'GET', isArray: true},
+        'remove': {method: 'DELETE'},
+      'delete': {method: 'DELETE'} }
     )
   })
-  .controller('employeeController', function (employeesService, companiesService, $scope, $rootScope, $location) {
+  .controller('employeeController', function (employeesService, companiesService, $scope, $rootScope, $location, $cookies) {
     if (!$rootScope.authenticated) {
       console.log('not logged in, redirect')
       $location.path('/login')
@@ -15,11 +20,9 @@ angular.module('prestacionesApp')
     $rootScope.selectedEmployee = null
 
     $scope.newEmployee = {firstName: null, lastName: null, jobTitle: null, identifier: null, basicSalary: null, startDate: null, endDate: null, companyId: null, aliquotVacationBonus: null, antiquityDays: null, created_at: null, created_by: null}
-    $scope.selectedEmployee = null
 
-    $scope.addPayments = function (e, employeeId) {
-      $rootScope.selectedEmployee = employeeId
-      $location.path('/payments')
+    $scope.addPayments = function (e, employee) {
+      $location.path('/payments/' + employee._id)
     }
 
     $scope.deleteEmployee = function (e, employee) {

@@ -1,21 +1,28 @@
 angular.module('prestacionesApp')
   .factory('paymentsService', function ($resource) {
     return $resource('api/v1/payments/:id', { id: '@_id'},
-      { update: { method: 'put'} }
+      { 'get': {method: 'GET'},
+        'save': {method: 'POST'},
+        'query': {method: 'GET', isArray: true},
+        'remove': {method: 'DELETE'},
+      'delete': {method: 'DELETE'} }
     )
   })
-  .controller('paymentController', function (employeesService, paymentsService, $scope, $rootScope, $location) {
+  .controller('paymentController', function (paymentsService, employeesService, companiesService, $scope, $rootScope, $location, $cookies, $routeParams) {
     if (!$rootScope.authenticated) {
       console.log('not logged in, redirect')
       $location.path('/login')
     }
-    if ($rootScope.selectedEmployee === null) {
+    var employeeId = $routeParams.empId
+    if (!employeeId) {
       $location.path('/employees')
     }
 
-    $scope.employee = employeesService.get({id: $rootScope.selectedEmployee})
+    $scope.employee = employeesService.get({id: employeeId})
+    $scope.company = companiesService.get({id: $scope.employee.companyId})
 
     $scope.payments = paymentsService.query()
+
     $scope.newPayment = {salary: null, startDate: null, endDate: null, deduction: null, employeeId: null, created_at: null, created_by: null}
 
     $scope.validateEndDate = function () {
@@ -45,11 +52,11 @@ angular.module('prestacionesApp')
     }
 
     $scope.calculate = function () {
-      var endDate = $scope.payments[$scope.payments.length - 1].endDate
-      var startDate = $scope.payments[0].startDate
+      var endDate = new Date($scope.payments[$scope.payments.length - 1].endDate)
+      var startDate = new Date($scope.payments[0].startDate)
       var totalTime = workedTime(startDate, endDate)
       var months = totalTime.days > 14 ? totalTime.months + 1 : totalTime.months
-      var firstMonth = startDate.getMonths() + 1
+      var firstMonth = startDate.getMonth() + 1
 
       var result = 0
       for (var i = 0; i < months; i++) {
@@ -57,11 +64,11 @@ angular.module('prestacionesApp')
         var currentMonth = firstMonth === 12 ? 1 : firstMonth + 1
 
         for (var j = 0; j < $scope.payments.length; j++) {
-          if ($scope.payments[j].startDate.getMonth() + 1 === currentMonth) {
+          if (new Date($scope.payments[j].startDate).getMonth() + 1 === currentMonth) {
             paymentPeriod.push($scope.payments[j])
           }
 
-          var assignment = getAntiquityOfPeriod(paymentPeriod, $scope.testEmployee.antiquityDays / months, $scope.testCompany.interest, $scope.testCompany.utilityDays)
+          var assignment = getAntiquityOfPeriod(paymentPeriod, $scope.employee.antiquityDays / months, $scope.company.interest, $scope.company.utilityDays)
 
           assignment.forEach(function (element) {
             result += element.interestAmount
@@ -72,19 +79,20 @@ angular.module('prestacionesApp')
     }
 
     var workedTime = function (startDate, endDate) {
+      console.log('Begining workedtime')
       var duration = {years: 0, months: 0, days: 0}
       if (startDate > endDate) {
         return duration
       }
 
-      var endMonth = endDate.getMonth() + 1
-      var startMonth = startDate.getMonth() + 1
+      var endMonth = new Date(endDate).getMonth() + 1
+      var startMonth = new Date(startDate).getMonth() + 1
 
-      var startDay = startDate.getDate()
-      var endDay = endDate.getDate()
+      var startDay = new Date(startDate).getDate()
+      var endDay = new Date(endDate).getDate()
 
-      var startYear = startDate.getFullYear()
-      var endYear = endDate.getFullYear()
+      var startYear = new Date(startDate).getFullYear()
+      var endYear = new Date(endDate).getFullYear()
 
       duration.years = endYear - startYear
 
@@ -114,6 +122,7 @@ angular.module('prestacionesApp')
     }
 
     var getAntiquityOfPeriod = function (payments, antiquityDays, utilityDays, interest, vacationBonus) {
+      console.log('Begining getAntiquityOfPeriod')
       var assignments = []
       payments.forEach(function (element) {
         var assignment = {averageDailySalary: null, aliquotUtility: null, integralSalary: null, antiquityAmount: null, interestAmount: null}

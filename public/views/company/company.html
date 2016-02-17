@@ -25,9 +25,10 @@
       <thead>
         <tr>
           <th>Name</th>
-          <th>Logo</th>
-          <th>Created At</th>
-          <th>Created By</th>
+          <th>Interest</th>
+          <th>Utility Days</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -35,9 +36,8 @@
           <td>{{company.name}}</td>
           <td>{{company.interest}}</td>
           <td>{{company.utilityDays}}</td>
-          <td>{{company.logo}}</td>
-          <td>{{company.created_at | date:'dd/MM/yyyy HH:mm'}}</td>
-          <td>{{company.created_by}}</td>
+          <td class="text-center"><span class="glyphicon glyphicon-pencil" ng-click="editCompany($event, company)" title="Edit company information"></span></td>
+          <td class="text-center text-danger"><span class="glyphicon glyphicon-remove" ng-click="deleteCompany($event, company)" title="Remove company"></span></td>
         </tr>
       </tbody>
     </table>

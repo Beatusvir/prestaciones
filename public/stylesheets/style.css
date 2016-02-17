@@ -29,6 +29,6 @@ a {
 .link-enabled:hover{
   background: #fcfcfc; 
 }
-#table-employee tr td span:hover{
+table tr td span:hover{
   cursor: pointer;
 }

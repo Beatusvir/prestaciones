@@ -90,22 +90,10 @@
           <td>{{employee.startDate | date:'dd/MM/yyyy'}}</td>
           <td>{{employee.endDate | date:'dd/MM/yyyy'}}</td>
           <td class="text-center"><span class="glyphicon glyphicon-pencil" ng-click="editEmployee($event, employee)" title="Edit employee information"></span></td>
-          <td class="text-center"><span class="glyphicon glyphicon-tag" ng-click="addPayments($event, employee._id)" title="Add payments to employee"></span></td>
+          <td class="text-center"><span class="glyphicon glyphicon-tag" ng-click="addPayments($event, employee)" title="Add payments to employee"></span></td>
           <td class="text-center text-danger"><span class="glyphicon glyphicon-remove" ng-click="deleteEmployee($event, employee)" title="Remove employee"></span></td>
         </tr>
       </tbody>
     </table>
   </div>
 </div>
-</div>
-
-</div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-<script src="./js/prestaciones.js"></script>
-<script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-crossorigin="anonymous"></script>
-</body>
-
-</html>
