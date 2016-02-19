@@ -4,6 +4,9 @@ var mongoose = require('mongoose')
 var busboy = require('connect-busboy')
 var path = require('path')
 var fs = require('fs-extra')
+var multer = require('multer')
+
+var upload = multer({ dest: 'uploads/' })
 
 var Employee = mongoose.model('Employee')
 var Company = mongoose.model('Company')
@@ -71,7 +74,7 @@ router.route('/v1/employees')
 router.route('/v1/employees/:id')
 
   .get(function (req, res, next) {
-    console.log('Trying to get employee with id: ' + req.params.id);
+    console.log('Trying to get employee with id: ' + req.params.id)
     Employee.findById(req.params.id, function (err, employee) {
       if (err) {
         return res.status(500).send(err)
@@ -81,7 +84,7 @@ router.route('/v1/employees/:id')
   })
 
   .put(function (req, res, next) {
-    console.log('Trying to put employee with id: ' + req.params.id);
+    console.log('Trying to put employee with id: ' + req.params.id)
     Employee.findById(req.params.id, function (err, employee) {
       if (err) {
         return res.status(500).send(err)
@@ -155,7 +158,7 @@ router.route('/v1/companies')
 router.route('/v1/companies/:id')
 
   .get(function (req, res, next) {
-    console.log('Trying to get company with id: ' + req.params.id);
+    console.log('Trying to get company with id: ' + req.params.id)
     Company.findById(req.params.id, function (err, company) {
       if (err) {
         return res.status(500).send(err)
@@ -235,7 +238,7 @@ router.route('/v1/assignments')
 router.route('/v1/assignments/:id')
 
   .get(function (req, res, next) {
-    console.log('Trying to get assignment with id: ' + req.params.id);
+    console.log('Trying to get assignment with id: ' + req.params.id)
     Assignment.findById(req.params.id, function (err, assignment) {
       if (err) {
         return res.status(500).send(err)
@@ -316,7 +319,7 @@ router.route('/v1/payments')
 router.route('/v1/payments/:id')
 
   .get(function (req, res, next) {
-    console.log('Trying to get payment with id: ' + req.params.id);
+    console.log('Trying to get payment with id: ' + req.params.id)
     Payment.findById(req.params.id, function (err, payment) {
       if (err) {
         return res.status(500).send(err)
@@ -358,21 +361,17 @@ router.route('/v1/payments/:id')
     })
   })
 
-router.route('/upload')
-  .post(function (req, res, next) {
-    console.log('Trying to upload file')
-    var fstream
-    req.pipe(req.busboy)
-    req.busboy.on('file', function (fieldname, file, filename) {
-      console.log('Uploading: ' + filename)
+var cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
 
-      fstream = fs.createWriteStream(__dirname + '/img/' + filename)
-      file.pipe(fstream)
-      fstream.on('close', function () {
-        console.log('Upload finished of ' + filename)
-        res.redirect('back')
-      })
-    })
+router.route('/upload')
+  .post('/cool-profile', cpUpload, function (req, res, next) {
+    // req.files is an object (String -> Array) where fieldname is the key, and the value is array of files
+    //
+    // e.g.
+    //  req.files['avatar'][0] -> File
+    //  req.files['gallery'] -> Array
+    //
+    // req.body will contain the text fields, if there were any
   })
 
 module.exports = router

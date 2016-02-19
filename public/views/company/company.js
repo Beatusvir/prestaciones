@@ -39,6 +39,7 @@ angular.module('prestacionesApp')
     }
 
     $scope.post = function () {
+      console.log('Trying to upload file')
       $scope.uploader.uploadAll()
       $scope.newCompany.created_at = Date.now()
       $scope.newCompany.created_by = $rootScope.current_user.username

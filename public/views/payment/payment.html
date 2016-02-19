@@ -36,6 +36,8 @@
           <th>Start Date</th>
           <th>End Date</th>
           <th>Deductions</th>
+          <th>Total</th>
+          <th>Average</th>
         </tr>
       </thead>
       <tbody>
@@ -44,6 +46,8 @@
           <td>{{payment.startDate | date:'dd/MM/yyyy'}}</td>
           <td>{{payment.endDate | date:'dd/MM/yyyy'}}</td>
           <td>{{payment.deduction}}</td>
+          <td>{{payment.salary - payment.deduction | number:2}}</td>
+          <td>{{(payment.salary - payment.deduction) / 7  | number:2}}</td>
         </tr>
       </tbody>
     </table>

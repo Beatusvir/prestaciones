@@ -1,45 +1,42 @@
-<div class="row">
-  <form ng-submit="post()" class="form-horizontal">
-    <h3>Add Company</h3>
-    <div class="form-group">
-      <input type="text" class="form-control" ng-model="newCompany.name" placeholder="Company name" required>
+<section layout="row" layout-align="center center" layout-wrap>
+  <form ng-submit="post()" class="form-horizontal" enctype="multipart/form-data">
+    <div layout="row">
+      <md-input-container>
+        <input type="text" class="form-control" ng-model="newCompany.name" placeholder="Company name" required>
+      </md-input-container>
     </div>
-    <div class="form-group">
-      <input type="number" class="form-control" ng-model="newCompany.utilityDays" placeholder="Utility Days" required>
+    <div layout="row">
+      <md-input-container>
+        <input type="number" class="form-control" ng-model="newCompany.utilityDays" placeholder="Utility Days" required>
+      </md-input-container>
     </div>
-    <div class="form-group">
-      <input type="number" class="form-control" ng-model="newCompany.interest" placeholder="Interest" required>
+    <div layout="row">
+      <md-input-container>
+        <input type="number" class="form-control" ng-model="newCompany.interest" placeholder="Interest" required>
+      </md-input-container>
     </div>
-    <div class="form-group">
-      <input type="file" nv-file-select uploader="uploader" required>
+    <div layout="row">
+      <md-input-container>
+        <input type="file" nv-file-select="" uploader="uploader" required>
+      </md-input-container>
     </div>
-    <div class="form-group">
-      <button class="btn btn-primary">Save</button>
+    <div layout="row">
+      <md-input-container>
+        <md-button type="submit" class="md-raised md-primary">Save</button>
+      </md-input-container>
     </div>
   </form>
-</div>
-<div class="row">
-  <div class="col-xs-12" ng-show="companies.length > 0">
-    <h3>Company List</h3>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Interest</th>
-          <th>Utility Days</th>
-          <th>Edit</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="company in companies">
-          <td>{{company.name}}</td>
-          <td>{{company.interest}}</td>
-          <td>{{company.utilityDays}}</td>
-          <td class="text-center"><span class="glyphicon glyphicon-pencil" ng-click="editCompany($event, company)" title="Edit company information"></span></td>
-          <td class="text-center text-danger"><span class="glyphicon glyphicon-remove" ng-click="deleteCompany($event, company)" title="Remove company"></span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+</section>
+<section layout="row" layout-align="center center" layout-wrap>
+  <md-list>
+    <md-subheader class="md-no-sticky">Companies</md-subheader>
+    <md-list-item class="md-3-line" ng-repeat="company in companies">
+      <img ng-src="{{company.logo}}" class="md-avatar" alt="{{company.name}}" />
+      <div class="md-list-item-text" layout="column">
+        <h3>Company: {{ company.name }}</h3>
+        <h4>Interest Amount: {{ company.interest }} %</h4>
+        <p>Utility Days: {{ company.utilityDays }}</p>
+      </div>
+    </md-list-item>
+  </md-list>
+</section>

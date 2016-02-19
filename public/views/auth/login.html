@@ -1,18 +1,19 @@
-<div class="absolute-center">
-  <div class="row">
-    <h1><span class="glyphicon glyphicon-user"></span> Login</h1>
-  </div>
-  <div class="row">
+<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
     <form ng-submit="login()" class="form-horizontal">
-      <div class="form-group">
-        <input type="text" id="inputUsername" ng-model="user.username" class="form-control" placeholder="User name">
+      <div layout="row">
+        <md-input-container>
+          <input type="text" id="inputUsername" ng-model="user.username" class="form-control" placeholder="User Name">
+        </md-input-container>
       </div>
-      <div class="form-group">
-        <input type="password" id="inputPassword" ng-model="user.password" class="form-control" placeholder="Password">
+      <div layout="row">
+        <md-input-container>
+          <input type="password" id="inputPassword" ng-model="user.password" class="form-control" placeholder="Password">
+        </md-input-container>
       </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Login</button>
+      <div layout="row">
+        <md-input-container>
+          <md-button class="md-raised md-primary" type="submit">Login</md-button>
+        </md-input-container>
       </div>
     </form>
-  </div>
-</div>
+</section>

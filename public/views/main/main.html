@@ -1,13 +1,35 @@
-<div class="row">
-  <a href="#/companies"><div class="col-xs-12 col-md-6" ng-class="companiesClass()">
-    <h3 class="text-center">Empresas</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro eius unde, nam, architecto tempora quos distinctio ipsum
-      eveniet veniam soluta id natus laborum voluptate labore reiciendis excepturi quod. Amet, accusantium.</p>
-  </div></a>
-  <a ng-show="companies.length > 0" href="#/employees"><div class="col-xs-12 col-md-6" ng-class="companiesClass()">
-    <h3 class="text-center">Trabajadores</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id delectus consectetur officiis nesciunt asperiores saepe,
-      est suscipit praesentium quidem unde repellendus ipsam velit dolorem, ratione, nam eos laudantium. Provident, nam.
-    </p>
+<div layout="row" ng-cloak>
+  <div flex>
+    <a href="#/companies">
+      <div ng-class="companiesClass()">
+        <div class="text-center">
+          <md-icon md-svg-icon="companies" class="icon-large"></md-icon>
+        </div>
+        <h3 class="text-center">Empresas</h3>
+        <p>Crear y modificar datos de empresas para asociar trabajadores e impresión de recibos</p>
+      </div>
+    </a>
+  </div>
+  <div flex>
+    <a ng-show="companies.length > 0" href="#/employees">
+    <div ng-class="companiesClass()">
+      <div class="text-center">
+        <md-icon md-svg-icon="employees" class="icon-large" aria-label="Cake Icon"></md-icon>
+      </div>
+      <h3 class="text-center">Trabajadores</h3>
+      <p>Crear y modificar trabajadores para asignación de pagos y generación de recibos</p>
+    </div>
+    </a>
+  </div>
+  <div flex>
+    <a ng-show="employees.length > 0" href="#">
+      <div ng-class="employeesClass()">
+        <div class="text-center">
+          <md-icon md-svg-icon="receipt" class="icon-large"></md-icon>
+        </div>
+        <h3 class="text-center">Recibos</h3>
+        <p>Generar e imprimir recibos a trabajadores</p>
+      </div>
+    </a>
   </div>
 </div>

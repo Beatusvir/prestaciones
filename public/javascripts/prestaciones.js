@@ -1,5 +1,5 @@
 'use strict'
-var app = angular.module('prestacionesApp', ['ngRoute', 'ngResource', 'angularFileUpload', 'ngCookies'])
+var app = angular.module('prestacionesApp', ['ngRoute', 'ngResource', 'angularFileUpload', 'ngCookies', 'ngMaterial'])
   .run(function ($rootScope, $http, $location, $cookies) {
     $rootScope.signout = function () {
       $http.get('/auth/signout')
@@ -20,8 +20,17 @@ var app = angular.module('prestacionesApp', ['ngRoute', 'ngResource', 'angularFi
       }
     })
   })
-
-  .config(function ($routeProvider, $locationProvider) {
+  .config(function ($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider) {
+    $mdIconProvider
+      .icon('menu', '../images/menu.svg', 512)
+      .icon('companies', '../images/companies.svg', 512)
+      .icon('employees', '../images/employees.svg', 512)
+      .icon('signout', '../images/signout.svg', 512)
+      .icon('receipt', '../images/receipt.svg', 512)
+      .icon('home', '../images/home.svg', 512)
+    $mdThemingProvider.theme('default')
+      .primaryPalette('orange')
+      .accentPalette('brown')
     $routeProvider
       // the timeline display
       .when('/', {

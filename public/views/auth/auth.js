@@ -26,6 +26,12 @@ angular.module('prestacionesApp')
       })
     }
 
+    $scope.signout = function () {
+      $cookies.remove('user')
+      $rootScope.authenticated = false
+      $rootScope.current_user = null
+    }
+
     $scope.register = function () {
       if ($scope.validatePassword()) {
         $scope.error_message = null

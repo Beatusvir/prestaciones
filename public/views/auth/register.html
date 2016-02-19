@@ -1,24 +1,28 @@
-<div class="absolute-center">
-  <div class="row">
-    <h1><span class="glyphicon glyphicon-check"></span> Register</h1>
-  </div>
-  <div class="row">
-    <form ng-submit="register()" class="form-horizontal">
+<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+  <form ng-submit="register()" class="form-horizontal">
+    <div layout="row">
       <p class="text-danger">{{error_message}}</p>
-      <div class="form-group">
+    </div>
+    <div layout="row">
+      <md-input-container>
         <input type="text" id="inputUsername" class="form-control" placeholder="User name" ng-model="user.username" required>
-      </div>
-      <div class="form-group">
+      </md-input-container>
+    </div>
+    <div layout="row">
+      <md-input-container>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" ng-model="user.password" required>
-      </div>
-      <div class="form-group">
+      </md-input-container>
+    </div>
+    <div layout="row">
+      <md-input-container>
         <input type="password" id="inputPasswordConfirm" class="form-control" placeholder="Confirm Password" ng-model="confirmPassword"
         ng-blur="validatePassword()" required>
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary">Register</button>
-      </div>
-    </form>
-  </div>
-
-</div>
+      </md-input-container>
+    </div>
+    <div layout="row">
+      <md-input-container>
+        <md-button class="md-raised md-primary" type="submit">Register</button>
+      </md-input-container>
+    </div>
+  </form>
+</section>

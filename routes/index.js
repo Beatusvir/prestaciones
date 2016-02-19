@@ -5,4 +5,4 @@ router.get('/', function(req, res, next){
   res.render('index', {title: 'Prestaciones Sociales'})
 })
 
-module.exports = router 
+module.exports = router
