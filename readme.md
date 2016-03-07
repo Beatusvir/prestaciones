@@ -12,7 +12,7 @@ This MEAN-app is used to calculate social benefits of employees using formulas f
 
 ##ToDo
 - [X] Add Payments
-- [ ] Calculate social benefits
+- [X] Calculate social benefits
 - [ ] Create invoice
 - [X] User Session
 - [ ] Style
