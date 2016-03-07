@@ -12,6 +12,30 @@ var app = angular.module('prestacionesApp', ['ngRoute', 'ngResource', 'angularFi
     $rootScope.goHome = function() {
       $location.path('/')
     }
+    $rootScope.last = {
+      bottom: true,
+      top: false,
+      left: false,
+      right: false
+    };
+    $rootScope.toastPosition = angular.extend({}, $rootScope.last)
+    $rootScope.getToastPosition = function() {
+      $rootScope.sanitizePosition()
+      return Object.keys($rootScope.toastPosition)
+        .filter(function(pos) {
+          return $rootScope.toastPosition[pos]
+        })
+        .join(' ')
+    }
+
+    $rootScope.sanitizePosition = function() {
+      var current = $rootScope.toastPosition
+      if (current.bottom && $rootScope.last.top) current.top = false
+      if (current.top && $rootScope.last.bottom) current.bottom = false
+      if (current.right && $rootScope.last.left) current.left = false
+      if (current.left && $rootScope.last.right) current.right = false
+      $rootScope.last = angular.extend({}, current)
+    }
 
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
       if ($cookies.get('user')) {

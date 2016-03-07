@@ -1,12 +1,11 @@
 angular.module('prestacionesApp')
-  .controller('authController', function($scope, $http, $rootScope, $location, $cookies) {
+  .controller('authController', function($scope, $http, $rootScope, $location, $cookies, $mdToast) {
     $scope.user = {
       username: null,
       password: null
     }
     $scope.error_message = null
     $scope.confirmPassword = null
-    $scope.hasError = false
 
     $scope.validatePassword = function() {
       if ($scope.confirmPassword !== $scope.user.password) {
@@ -18,11 +17,6 @@ angular.module('prestacionesApp')
     }
 
     $scope.login = function() {
-      if (!$scope.username || !$scope.password) {
-        $scope.error_message = "Debe ingresar todos los datos"
-        $location.path('/login')
-      }
-      $scope.hasError = false
       $http.post('/auth/login', $scope.user).success(function(data) {
         if (data.state == 'success') {
           $cookies.put('user', JSON.stringify(data.user))
@@ -30,12 +24,17 @@ angular.module('prestacionesApp')
           $rootScope.current_user = data.user
           $location.path('/')
         } else {
-          $scope.error_message = data.message
+          $mdToast.show(
+            $mdToast.simple()
+            .textContent(data.message)
+            .position($rootScope.getToastPosition())
+            .hideDelay(3000)
+          )
         }
       })
     }
 
-    $scope.signout = function(){
+    $scope.signout = function() {
       $rootScope.signout()
     }
 
@@ -48,7 +47,12 @@ angular.module('prestacionesApp')
             $rootScope.current_user = data.user
             $location.path('/')
           } else {
-            $scope.error_message = data.message
+            $mdToast.show(
+              $mdToast.simple()
+              .textContent(data.message)
+              .position($rootScope.getToastPosition())
+              .hideDelay(3000)
+            )
           }
         })
       }
