@@ -18,7 +18,6 @@ var employeeSchema = new mongoose.Schema({
   endDate: Date,
   companyId: { type: Schema.ObjectId, ref: 'Company'},
   aliquotVacationBonus: Number,
-  antiquityDays: Number,
   created_at: { type: Date, default: Date.now },
   created_by: String
 // created_by: { type: Schema.ObjectId, ref: 'User'}

@@ -4,13 +4,9 @@
       <md-input-container>
         <input type="text" class="form-control" ng-model="newCompany.name" placeholder="Company name" required>
       </md-input-container>
-    </div>
-    <div layout="row">
       <md-input-container>
         <input type="number" class="form-control" ng-model="newCompany.utilityDays" placeholder="Utility Days" required>
       </md-input-container>
-    </div>
-    <div layout="row">
       <md-input-container>
         <input type="number" class="form-control" ng-model="newCompany.interest" placeholder="Interest" required>
       </md-input-container>
@@ -19,24 +15,29 @@
       <md-input-container>
         <input type="file" nv-file-select="" uploader="uploader" required>
       </md-input-container>
-    </div>
-    <div layout="row">
       <md-input-container>
-        <md-button type="submit" class="md-raised md-primary">Save</button>
+        <md-button type="submit" class="md-raised md-primary">Save</md-button>
       </md-input-container>
     </div>
   </form>
 </section>
 <section layout="row" layout-align="center center" layout-wrap>
-  <md-list>
-    <md-subheader class="md-no-sticky">Companies</md-subheader>
-    <md-list-item class="md-3-line" ng-repeat="company in companies">
-      <img ng-src="{{company.logo}}" class="md-avatar" alt="{{company.name}}" />
-      <div class="md-list-item-text" layout="column">
-        <h3>Company: {{ company.name }}</h3>
-        <h4>Interest Amount: {{ company.interest }} %</h4>
-        <p>Utility Days: {{ company.utilityDays }}</p>
-      </div>
-    </md-list-item>
-  </md-list>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Logo</th>
+      <th>Name</th>
+      <th>Utility Days</th>
+      <th>Interest</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="company in companies">
+      <td><img src="{{company.logo}}" alt=""></td>
+      <td>{{company.name}}</td>
+      <td>{{company.utilityDays}}</td>
+      <td>{{company.interest}}</td>
+    </tr>
+    </tbody>
+  </table>
 </section>

@@ -4,19 +4,18 @@ html, body {
   height:100%;
   margin: 0px;
   padding: 0px;
-  color: #040404; 
+  color: #040404;
 }
 
 a {
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 a:visited {
-  color: #040404;
+  color: #efefef;
 }
 /* Toolbar area */
-
-home {
+.home {
   background-color: transparent;
   border: none;
   height: 38px;
@@ -51,7 +50,7 @@ md-list-item > button {
 /* Primary content area */
 
 #content {
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 #content  {
@@ -149,10 +148,30 @@ span.name {
   width: 128px;
 }
 
-md-icon:hover{
-  color: rgba(0,0,0,84);
+.payments-section{
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
 }
-md-list-item:hover{
-  cursor: pointer;
-  background: #efefef;
+.payments-section img{
+  margin: 5px 20px 0 20px;
+}
+
+#table-payments{
+  margin-top: 50px;
+}
+
+.auth-card.mdl-card{
+  width: 300px;
+  margin: 0 auto;
+}
+.auth-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('../assets/demos/welcome_card.jpg') center / cover;
+}
+.auth-card-wide > .mdl-card__menu {
+  color: #fff;
 }

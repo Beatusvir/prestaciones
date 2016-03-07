@@ -1,26 +1,39 @@
 'use strict'
 var app = angular.module('prestacionesApp', ['ngRoute', 'ngResource', 'angularFileUpload', 'ngCookies', 'ngMaterial'])
-  .run(function ($rootScope, $http, $location, $cookies) {
-    $rootScope.signout = function () {
+  .run(function($rootScope, $http, $location, $cookies) {
+    $rootScope.signout = function() {
       $http.get('/auth/signout')
+      $cookies.remove('user')
       $rootScope.authenticated = false
       $rootScope.current_user = ''
+      $location.path('/login')
     }
 
-    $rootScope.$on('$routeChangeStart', function (event, next, current) {
-      var user = JSON.parse($cookies.get('user'))
-      if (user === null) {
-        if (next.templateUrl === 'views/auth/login.html') {
+    $rootScope.goHome = function() {
+      $location.path('/')
+    }
+
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+      if ($cookies.get('user')) {
+        var user = JSON.parse($cookies.get('user'))
+        if (user === null) {
+          if (next.templateUrl !== 'views/auth/register.html' || next.templateUrl !== 'views/auth/login.html') {
+            $location.path('/login')
+          }
+        } else {
+          $rootScope.authenticated = true
+          $rootScope.current_user = user
+        }
+      } else {
+        if (next.templateUrl === 'views/auth/register.html') {
+          $location.path('/register')
         } else {
           $location.path('/login')
         }
-      } else {
-        $rootScope.authenticated = true
-        $rootScope.current_user = user
       }
     })
   })
-  .config(function ($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider) {
+  .config(function($routeProvider, $locationProvider, $mdThemingProvider, $mdIconProvider) {
     $mdIconProvider
       .icon('menu', '../images/menu.svg', 512)
       .icon('companies', '../images/companies.svg', 512)
@@ -29,10 +42,10 @@ var app = angular.module('prestacionesApp', ['ngRoute', 'ngResource', 'angularFi
       .icon('receipt', '../images/receipt.svg', 512)
       .icon('home', '../images/home.svg', 512)
     $mdThemingProvider.theme('default')
-      .primaryPalette('orange')
-      .accentPalette('brown')
+      .primaryPalette('indigo')
+      .accentPalette('pink')
     $routeProvider
-      // the timeline display
+    // the timeline display
       .when('/', {
         templateUrl: 'views/main/main.html',
         controller: 'mainController'
@@ -77,5 +90,7 @@ var app = angular.module('prestacionesApp', ['ngRoute', 'ngResource', 'angularFi
         templateUrl: 'views/test/test.html',
         controller: 'testController'
       })
-      .otherwise({redirectTo: '/'})
+      .otherwise({
+        redirectTo: '/'
+      })
   })

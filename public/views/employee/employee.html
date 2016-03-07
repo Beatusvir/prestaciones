@@ -1,99 +1,88 @@
-<div class="row">
-  <form ng-submit="post()" class="form-horizontal">
-    <h3>Add Employee</h3>
-    <div class="form-group">
-      <label for="inputFirstName" class="control-label col-xs-2">First Name</label>
-      <div class="col-xs-4">
-        <input type="text" id="inputFirstName" class="form-control" ng-model="newEmployee.firstName" placeholder="Employee name"
-        required>
-      </div>
-      <label for="inputLastName" class="control-label col-xs-2">Last Name</label>
-      <div class="col-xs-4">
-        <input type="text" id="inputLastName" class="form-control" ng-model="newEmployee.lastName" placeholder="Employee last name"
-        required>
-      </div>
+<section layout="row" layout-align="center center" layout-wrap>
+    <form ng-submit="post()" class="form-horizontal">
+        <div flex layout="row">
+            <md-input-container>
+                <input type="text" id="inputFirstName" class="form-control" ng-model="newEmployee.firstName"
+                       placeholder="First Name" required>
+            </md-input-container>
+            <md-input-container>
+                <input type="text" id="inputLastName" class="form-control" ng-model="newEmployee.lastName"
+                       placeholder="Last Name" required>
+            </md-input-container>
+            <md-input-container>
+                <input type="number" id="inputId" class="form-control" ng-model="newEmployee.identifier"
+                       placeholder="Id" required>
+            </md-input-container>
+        </div>
+        <div flex layout="row">
+            <md-datepicker ng-model="newEmployee.startDate" md-placeholder="Start Date"></md-datepicker>
+            <md-datepicker ng-model="newEmployee.endDate" md-placeholder="End Date"></md-datepicker>
+        </div>
+        <div flex layout="row">
+            <md-input-container>
+                <input type="number" id="inputSalary" class="form-control" ng-model="newEmployee.basicSalary"
+                       placeholder="Basic Salary" step="0.01"
+                       required>
+            </md-input-container>
+            <md-input-container>
+                <input type="number" id="inputAliquotVacationBonus" class="form-control"
+                       ng-model="newEmployee.aliquotVacationBonus" placeholder="Aliquot Vacation Bonus" step="0.01"
+                       required>
+            </md-input-container>
+        </div>
+        <div flex layout="row">
+            <md-input-container>
+                <input type="text" id="inputJobTitle" class="form-control" ng-model="newEmployee.jobTitle"
+                       placeholder="Job title" required>
+            </md-input-container>
+            <md-input-container>
+                <label for="selectCompany">Company</label>
+                <md-select name="companies" id="selectCompany" ng-model="newEmployee.companyId">
+                    <md-option ng-repeat="company in companies" ng-value="company._id">{{company.name}}</md-option>
+
+                </md-select>
+            </md-input-container>
+        </div>
+        <md-input-container>
+            <md-button ng-show="!isEdit" class="md-raised md-primary" type="submit" ng-click="isEdit = false">Save</md-button>
+            <md-button ng-show="isEdit" class="md-raised md-primary" type="submit" ng-click="isEdit = true">Update</md-button>
+        </md-input-container>
+    </form>
+</section>
+<section layout-align="center center" layout-wrap>
+    <div layout="row">
+        <table id="table-employee" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Identifier</th>
+                <th>Name</th>
+                <th>Salary</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Edit</th>
+                <th>Payments</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="employee in employees">
+                <td>{{employee.identifier}}</td>
+                <td>{{employee.firstName}}, {{employee.lastName}}</td>
+                <td>{{employee.basicSalary}}</td>
+                <td>{{employee.startDate | date:'dd/MM/yyyy'}}</td>
+                <td>{{employee.endDate | date:'dd/MM/yyyy'}}</td>
+                <td class="text-center"><span class="glyphicon glyphicon-pencil"
+                                              ng-click="editEmployee($event, employee)"
+                                              title="Edit employee information"></span></td>
+                <td class="text-center"><span class="glyphicon glyphicon-tag"
+                                              ng-click="addPayments($event, employee)"
+                                              title="Add payments to employee"></span></td>
+                <td class="text-center text-danger"><span class="glyphicon glyphicon-remove"
+                                                          ng-click="deleteEmployee($event, employee)"
+                                                          title="Remove employee"></span></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <div class="form-group">
-      <label for="inputId" class="control-label col-xs-2">identifier</label>
-      <div class="col-xs-4">
-        <input type="number" id="inputId" class="form-control" ng-model="newEmployee.identifier" placeholder="Employee ID" required>
-      </div>
-      <label for="inputSalary" class="control-label col-xs-2">Salary</label>
-      <div class="col-xs-4">
-        <input type="number" id="inputSalary" class="form-control" ng-model="newEmployee.basicSalary" placeholder="Basic Salary"
-        required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputStartDate" class="control-label col-xs-2">Start Date</label>
-      <div class="col-xs-4">
-        <input type="date" id="inputStartDate" class="form-control" ng-model="newEmployee.startDate" placeholder="Start Date" required>
-      </div>
-      <label for="inputEndDate" class="control-label col-xs-2">End Date</label>
-      <div class="col-xs-4">
-        <input type="date" id="inputEndDate" class="form-control" ng-model="newEmployee.endDate" placeholder="End Date" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputAliquotVacationBonus" class="control-label col-xs-2">Vacation Bonus</label>
-      <div class="col-xs-4">
-        <input type="number" id="inputAliquotVacationBonus" class="form-control" ng-model="newEmployee.aliquotVacationBonus" placeholder="Aliquot Vacation Bonus"
-        required>
-      </div>
-      <label for="inputAntiquityDays" class="control-label col-xs-2">Antiquity</label>
-      <div class="col-xs-4">
-        <input type="number" id="inputAntiquityDays" class="form-control" ng-model="newEmployee.antiquityDays" placeholder="Antiquity Days"
-        required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="inputJobTitle" class="control-label col-xs-2">Job Title</label>
-      <div class="col-xs-4">
-        <input type="text" id="inputJobTitle" class="form-control" ng-model="newEmployee.jobTitle" placeholder="Job title" required>
-      </div>
-      <label for="selectCompany" class="control-label col-xs-2">Company</label>
-      <div class="col-xs-4">
-        <select name="companies" id="selectCompany" ng-model="newEmployee.companyId" ng-options="company._id as company.name for company in companies"
-        class="form-control"></select>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-xs-offset-2 col-xs-4">
-        <button ng-show="!isEdit" class="btn btn-primary" ng-click="isEdit = false">Save</button>
-        <button ng-show="isEdit" class="btn btn-primary" ng-click="isEdit = true">Update</button>
-      </div>
-    </div>
-</div>
-</form>
-</div>
-<div class="row">
-  <div class="col-xs-12" ng-show="employees.length > 0">
-    <h3>Employee List</h3>
-    <table id="table-employee" class="table table-striped">
-      <thead>
-        <tr>
-          <th>Identifier</th>
-          <th>Name</th>
-          <th>Salary</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Edit</th>
-          <th>Payments</th>
-          <th>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="employee in employees">
-          <td>{{employee.identifier}}</td>
-          <td>{{employee.firstName}}, {{employee.lastName}}</td>
-          <td>{{employee.basicSalary}}</td>
-          <td>{{employee.startDate | date:'dd/MM/yyyy'}}</td>
-          <td>{{employee.endDate | date:'dd/MM/yyyy'}}</td>
-          <td class="text-center"><span class="glyphicon glyphicon-pencil" ng-click="editEmployee($event, employee)" title="Edit employee information"></span></td>
-          <td class="text-center"><span class="glyphicon glyphicon-tag" ng-click="addPayments($event, employee)" title="Add payments to employee"></span></td>
-          <td class="text-center text-danger"><span class="glyphicon glyphicon-remove" ng-click="deleteEmployee($event, employee)" title="Remove employee"></span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+
+</section>

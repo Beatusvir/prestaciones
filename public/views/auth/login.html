@@ -1,19 +1,25 @@
-<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-    <form ng-submit="login()" class="form-horizontal">
-      <div layout="row">
+<div class="auth-card mdl-card mdl-shadow--2dp">
+  <form ng-submit="login()" class="">
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Login</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
         <md-input-container>
-          <input type="text" id="inputUsername" ng-model="user.username" class="form-control" placeholder="User Name">
+          <label>User Name</label>
+          <input type="text" id="inputUsername" class="" ng-model="user.username" required>
         </md-input-container>
-      </div>
-      <div layout="row">
         <md-input-container>
-          <input type="password" id="inputPassword" ng-model="user.password" class="form-control" placeholder="Password">
+          <label>Password</label>
+          <input type="password" id="inputPassword" class="" ng-model="user.password" required>
         </md-input-container>
-      </div>
-      <div layout="row">
-        <md-input-container>
-          <md-button class="md-raised md-primary" type="submit">Login</md-button>
-        </md-input-container>
-      </div>
-    </form>
-</section>
+
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-raised md-primary" type="submit">Login</md-button>
+      </md-card-actions>
+    </md-card>
+  </form>
+</div>

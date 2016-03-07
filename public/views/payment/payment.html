@@ -1,56 +1,63 @@
-<div class="row">
-  <div class="col-xs-6">
-    <h5>{{employee.firstName}}, {{employee.lastName}}</h5>
-    <h5>{{employee.startDate | date:'dd/MM/yyyy'}}</h5>
-    <h5>{{employee.endDate | date:'dd/MM/yyyy'}}</h5>
-    <h5>{{employee.basicSalary | currency}}</h5>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-6">
-    <form ng-submit="post()" class="form-horizontal">
-      <div class="form-group">
-        <input type="number" class="form-control" ng-model="newPayment.salary" placeholder="Salary">
-      </div>
-      <div class="form-group">
-        <input type="date" class="form-control" ng-model="newPayment.startDate" ng-change="validatePreviousPaymentDate()" placeholder="Start date">
-      </div>
-      <div class="form-group">
-        <input type="date" class="form-control" ng-model="newPayment.endDate" ng-change="validateEndDate()" placeholder="End date">
-      </div>
-      <div class="form-group">
-        <input type="number" class="form-control" ng-model="newPayment.deduction" placeholder="Deductions">
-      </div>
-      <div class="form-group">
-        <button class="btn btn-default">Add Payment</button>
-      </div>
-    </form>
-  </div>
-</div>
-<div class="row" ng-show="payments.length > 0">
-  <div class="col-xs-12">
-    <table class="table table-striped">
-      <thead>
+<section layout="row" layout-align="center top">
+    <section layout="row" class="payments-section" flex="30" layout-align="center center">
+        <form ng-submit="post()" class="">
+            <div layout="row">
+                <md-datepicker class="" ng-model="newPayment.startDate" ng-change="validatePreviousPaymentDate()"
+                               md-placeholder="Start date"></md-datepicker>
+                <md-datepicker class="" ng-model="newPayment.endDate" ng-change="validateEndDate()"
+                               md-placeholder="End date"></md-datepicker>
+            </div>
+            <div layout="row">
+                <md-input-container>
+                    <input type="number" class="form-control" ng-model="newPayment.salary" placeholder="Salary"
+                           md-autofocus>
+                </md-input-container>
+                <md-input-container>
+                    <input type="number" class="form-control" ng-model="newPayment.deduction" placeholder="Deductions">
+                </md-input-container>
+            </div>
+            <md-input-container>
+                <md-button class="md-primary" ng-click="post()">Add Payment</md-button>
+                <md-button class="md-primary" ng-click="calculate()">Calculate</md-button>
+                <md-button class="md-primary" ng-click="">Print</md-button>
+            </md-input-container>
+        </form>
+    </section>
+    <section layout="column" class="payments-section" flex="20" flex-offset="50">
+        <div flex layout="row">
+            <div layout="column">
+                <img src="../../images/employees.svg" alt="">
+            </div>
+            <div flex layout="column">
+                <h3 class="text-primary">{{employee.firstName}} {{employee.lastName}}</h3>
+                <h5>Start Date: <strong>{{employee.startDate | date:'dd/MM/yyyy'}}</strong></h5>
+                <h5>End Date: <strong>{{employee.endDate | date:'dd/MM/yyyy'}}</strong></h5>
+                <h5>Basic Salary: <strong>{{employee.basicSalary | currency}}</strong></h5>
+            </div>
+        </div>
+    </section>
+</section>
+<section layout="row" layout-align="center center" ng-show="payments.length > 0">
+    <table class="table table-striped" id='table-payments'>
+        <thead>
         <tr>
-          <th>Salary</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Deductions</th>
-          <th>Total</th>
-          <th>Average</th>
+            <th></th>
+            <th>Salary</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Deductions</th>
+            <th>Total</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr ng-repeat="payment in payments">
-          <td>{{payment.salary}}</td>
-          <td>{{payment.startDate | date:'dd/MM/yyyy'}}</td>
-          <td>{{payment.endDate | date:'dd/MM/yyyy'}}</td>
-          <td>{{payment.deduction}}</td>
-          <td>{{payment.salary - payment.deduction | number:2}}</td>
-          <td>{{(payment.salary - payment.deduction) / 7  | number:2}}</td>
+            <td class="text-danger"><span ng-click="removePayment($event, payment)" class="glyphicon glyphicon-remove" title="Remove row"></span></td>
+            <td>{{payment.salary | currency}}</td>
+            <td>{{payment.startDate | date:'dd/MM/yyyy'}}</td>
+            <td>{{payment.endDate | date:'dd/MM/yyyy'}}</td>
+            <td>{{payment.deduction}}</td>
+            <td>{{payment.salary - payment.deduction | currency}}</td>
         </tr>
-      </tbody>
+        </tbody>
     </table>
-    <button class="btn btn-primary" ng-click="calculate()">Calculate</button>
-  </div>
-</div>
+</section>

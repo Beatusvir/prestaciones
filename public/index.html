@@ -5,21 +5,27 @@
   <meta charset="UTF-8">
   <title>Prestaciones Sociales</title>
   <link rel="stylesheet" href="./stylesheets/angular-material.min.css">
+  <link rel="stylesheet" href="./stylesheets/bootstrap.min.css">
   <link rel="stylesheet" href="./stylesheets/style.css">
   <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
 </head>
 
 <body ng-app="prestacionesApp" layout="column">
-  <md-toolbar layout="row">
-    <md-button class="home" aria-label="Operaciones">
-      <md-icon md-svg-icon="home"></md-icon>
-    </md-button>
-    <h3>Prestaciones</h3>
-    <h6 ng-show="authenticated">{{current_user.username}}</h6>
-    <md-button class="home" ng-show="authenticated" ng-click="signout()" aria-label="Log Out">
-      <md-icon md-svg-icon="signout"></md-icon>
-    </md-button>
-    <p class="navbar-right navbar-text" ng-hide="authenticated"><a href="#/login">Login</a> or <a href="#/register">Register</a> </p>
+  <md-toolbar class="md-whiteframe-2dp">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" aria-label="Settings" ng-click="goHome()">
+        <md-icon md-svg-icon="home"></md-icon>
+      </md-button>
+      <h2>
+          <span>Prestaciones Sociales</span>
+        </h2>
+      <span flex></span>
+      <h2><span ng-show="authenticated">{{current_user.username}}</span></h2>
+      <md-button class="md-icon-button" ng-show="authenticated" ng-click="signout()">
+        <md-icon md-svg-icon="signout"></md-icon>
+      </md-button>
+      <h2><span ng-hide="authenticated"><a href="#/login">Login</a> or <a href="#/register">Register</a></span></h2>
+    </div>
   </md-toolbar>
   <div flex layout="row">
     <md-content flex id="content">

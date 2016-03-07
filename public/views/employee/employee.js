@@ -19,7 +19,7 @@ angular.module('prestacionesApp')
     $scope.isEdit = false
     $rootScope.selectedEmployee = null
 
-    $scope.newEmployee = {firstName: null, lastName: null, jobTitle: null, identifier: null, basicSalary: null, startDate: null, endDate: null, companyId: null, aliquotVacationBonus: null, antiquityDays: null, created_at: null, created_by: null}
+    $scope.newEmployee = {firstName: null, lastName: null, jobTitle: null, identifier: null, basicSalary: null, startDate: null, endDate: null, companyId: null, aliquotVacationBonus: null, created_at: null, created_by: null}
 
     $scope.addPayments = function (e, employee) {
       $location.path('/payments/' + employee._id)
@@ -58,6 +58,6 @@ angular.module('prestacionesApp')
     var refreshEmployees = function () {
       $scope.employees = employeesService.query()
       $scope.companies = companiesService.query()
-      $scope.newEmployee = {firstName: null, lastName: null, jobTitle: null, identifier: null, basicSalary: null, startDate: null, endDate: null, companyId: null, aliquotVacationBonus: null, antiquityDays: null, created_at: null, created_by: null}
+      $scope.newEmployee = {firstName: null, lastName: null, jobTitle: null, identifier: null, basicSalary: null, startDate: null, endDate: null, companyId: null, aliquotVacationBonus: null, created_at: null, created_by: null}
     }
   })

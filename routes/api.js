@@ -27,7 +27,7 @@ function isAuthenticated (req, res, next) {
   }
 
   // if the user is not authenticated then redirect him to the login page
-  return res.redirect('/#login')
+  return res.redirect('/#/login')
 }
 
 router.use('/v1/employees', isAuthenticated)
@@ -364,7 +364,7 @@ router.route('/v1/payments/:id')
 var cpUpload = upload.fields([{ name: 'avatar', maxCount: 1 }, { name: 'gallery', maxCount: 8 }])
 
 router.route('/upload')
-  .post('/cool-profile', cpUpload, function (req, res, next) {
+  //.post('/cool-profile', cpUpload, function (req, res, next) {
     // req.files is an object (String -> Array) where fieldname is the key, and the value is array of files
     //
     // e.g.
@@ -372,6 +372,6 @@ router.route('/upload')
     //  req.files['gallery'] -> Array
     //
     // req.body will contain the text fields, if there were any
-  })
+  //})
 
 module.exports = router
